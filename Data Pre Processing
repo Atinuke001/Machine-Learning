@@ -1,0 +1,53 @@
+#\import your python Libraries
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+import seaborn as sns
+#Import your Dataset using pandas
+dataset = pd.read_csv(r'path to the csv_document', encoding="latin1",sep="|")
+dataset.head(5) # 
+dataset.shape
+dataset.index
+dataset.columns
+#check out the missing values
+dataset.isnull().sum()
+#using leaking the data to handle missing data
+dataset['Column_Name'].mean()
+dataset['Column_Name'].tail()
+dataset['Column_Name'].replace(np.NaN,dataset['Column_Name'].mean()).tail()
+#Dealing with Categorical Values and remember that machine learning models are based on mathematical equation
+
+import your dataset
+convert categorical data into Numerical data
+X = dataset.iloc[ : , :-1].values
+X (to see the conversion)
+from sklearn.prepocessing import LabelEncoder
+label_encoder = LabelEncoder()
+X[ : ,0] = label_encoder.fit_transform(X[ :, 0])
+X
+from sklearn.prepocessing import OneHotEncoder
+onehotencoder = OneHotEncoder(categorical_features=[0])
+X = onehotencoder.fit_transform(X)
+#Lets introduce dummy Variables that takes value 0 or 1 in the absence of categorical effect
+dummy = pd.get_dummies(dataset['column_name'])
+dummy
+#use pandas to create dummy variables
+dataset = pd.concat([dataset,dummy], axis =1)
+dataset = drop(['column_name'], axis =1)
+#Spilt data into Train and Test data
+from sklearn.cross_validation import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X,y,test_size=0.2)
+X_train
+X_test
+y_train
+y_test
+#feature SCaling
+dataset
+
+from sklearn.prepocessing import StandardScalar
+standard_X = StandardScalar()
+X_train = StandardScalar.fit_transform(X_train)
+X_test = StandardScalar.fit_transform(X_test)
+
+
+
